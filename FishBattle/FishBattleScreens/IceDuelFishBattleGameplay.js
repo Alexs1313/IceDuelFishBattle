@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ const { height: fishBattleHeight } = Dimensions.get('window');
 import {
   fishBattleItems,
   fishBattleRules,
-} from '../IceDuelFishBattleConsts/iceDuelFishBattleGameConsts';
+} from '../FishBattleConsts/iceDuelFishBattleGameConsts';
 
 const fishBattleStorageKey = 'ice_duel_history';
 
@@ -34,6 +34,7 @@ const IceDuelFishBattleGameplay = () => {
   const [fishBattleChoice2, setFishBattleChoice2] = useState(null);
   const [fishBattleAlreadySaved, setFishBattleAlreadySaved] = useState(false);
   const fishBattleCurrentPlayer = fishBattleTurn === 1 ? player1 : player2;
+  const [fishBattleSessionId] = useState(Date.now());
 
   const fishBattleUpdateWins = async name => {
     if (!name || name === 'Draw') return;
@@ -46,20 +47,18 @@ const IceDuelFishBattleGameplay = () => {
 
   const fishBattleSaveFight = async fight => {
     const json = await AsyncStorage.getItem(fishBattleStorageKey);
-    const data = json ? JSON.parse(json) : [];
+    let data = json ? JSON.parse(json) : [];
 
-    const alreadyPlayed = data.some(
-      item =>
-        (item.player1 === fight.player1 && item.player2 === fight.player2) ||
-        (item.player1 === fight.player2 && item.player2 === fight.player1),
+    const existingIndex = data.findIndex(
+      item => item.sessionId === fight.sessionId,
     );
 
-    if (alreadyPlayed) {
-      console.log('Fight already exists — skipping save');
-      return;
+    if (existingIndex !== -1) {
+      data[existingIndex] = { ...data[existingIndex], ...fight };
+    } else {
+      data.unshift(fight);
     }
 
-    data.unshift(fight);
     await AsyncStorage.setItem(fishBattleStorageKey, JSON.stringify(data));
   };
 
@@ -92,7 +91,8 @@ const IceDuelFishBattleGameplay = () => {
       await fishBattleUpdateWins(finalWinner);
 
       const fight = {
-        id: Date.now(),
+        id: fishBattleSessionId,
+        sessionId: fishBattleSessionId,
         date: new Date().toISOString(),
         player1,
         player2,
@@ -185,7 +185,7 @@ ${fishBattleWinner} ${fishBattleWinner !== 'Draw' ? 'win!' : ''}`,
             {fishBattleSelected && (
               <TouchableOpacity onPress={() => setFishBattleMode('more')}>
                 <LinearGradient
-                  colors={['#F1B013', '#E5D607', '#DC5B05']}
+                  colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
                   style={fishBattleStyles.fishBattleMoreBtn}
                 >
                   <Text style={fishBattleStyles.fishBattleMoreBtnText}>
@@ -242,7 +242,7 @@ ${fishBattleWinner} ${fishBattleWinner !== 'Draw' ? 'win!' : ''}`,
 
             <TouchableOpacity onPress={fishBattleConfirm}>
               <LinearGradient
-                colors={['#F1B013', '#E5D607', '#DC5B05']}
+                colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
                 style={fishBattleStyles.fishBattleChooseBtn}
               >
                 <Text style={fishBattleStyles.fishBattleChooseBtnText}>
@@ -312,7 +312,7 @@ ${fishBattleWinner} ${fishBattleWinner !== 'Draw' ? 'win!' : ''}`,
                 <View style={fishBattleStyles.fishBattleWinnerBox}>
                   <Text style={fishBattleStyles.fishBattleWinnerText}>
                     {fishBattleWinner}{' '}
-                    {fishBattleWinner !== 'Draw' ? 'wins' : ''}
+                    {fishBattleWinner !== 'Draw' ? 'win' : ''}
                   </Text>
                 </View>
               </LinearGradient>
@@ -329,7 +329,7 @@ ${fishBattleWinner} ${fishBattleWinner !== 'Draw' ? 'win!' : ''}`,
             >
               <TouchableOpacity onPress={fishBattleShare}>
                 <LinearGradient
-                  colors={['#F1B013', '#E5D607', '#DC5B05']}
+                  colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
                   style={fishBattleStyles.fishBattleShareBtn}
                 >
                   <Text style={fishBattleStyles.fishBattleShareText}>
@@ -340,7 +340,7 @@ ${fishBattleWinner} ${fishBattleWinner !== 'Draw' ? 'win!' : ''}`,
 
               <TouchableOpacity onPress={fishBattleRestart}>
                 <LinearGradient
-                  colors={['#F1B013', '#E5D607', '#DC5B05']}
+                  colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
                   style={fishBattleStyles.fishBattleRestartBtn}
                 >
                   <Text style={fishBattleStyles.fishBattleRestartText}>
@@ -365,7 +365,7 @@ const fishBattleStyles = StyleSheet.create({
   },
   fishBattleHeader: {
     width: '100%',
-    backgroundColor: '#FFFFFF4D',
+    backgroundColor: '#ffffff6f',
     borderRadius: 22,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -380,18 +380,19 @@ const fishBattleStyles = StyleSheet.create({
   },
   fishBattlePlayerWrap: {
     borderRadius: 12,
-    width: '55%',
+    width: '58%',
     alignSelf: 'center',
     marginBottom: 24,
   },
   fishBattlePlayerTag: {
     paddingVertical: 16,
-    height: 60,
+    minHeight: 60,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   fishBattlePlayerText: {
-    fontSize: 19,
+    fontSize: 18,
     color: '#000',
     fontFamily: 'Ubuntu-Medium',
   },
@@ -412,8 +413,8 @@ const fishBattleStyles = StyleSheet.create({
     borderColor: '#FF9900',
   },
   fishBattleGroupItem: {
-    width: 120,
-    height: 120,
+    width: 130,
+    height: 130,
   },
   fishBattleMoreContainer: {
     alignItems: 'center',
@@ -478,13 +479,13 @@ const fishBattleStyles = StyleSheet.create({
   fishBattleResultNameTag: {
     borderRadius: 12,
     paddingVertical: 10,
-    paddingHorizontal: 40,
-    minWidth: 130,
+    paddingHorizontal: 20,
+    width: 160,
     alignItems: 'center',
     justifyContent: 'center',
   },
   fishBattleResultNameText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#000',
     fontFamily: 'Ubuntu-Medium',
   },

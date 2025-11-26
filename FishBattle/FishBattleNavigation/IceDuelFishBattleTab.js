@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, Platform, StyleSheet, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import IceDuelFishBattleGame from '../IceDuelFishBattleScreens/IceDuelFishBattleGame';
-import IceDuelFishBattleHistory from '../IceDuelFishBattleScreens/IceDuelFishBattleHistory';
-import IceDuelFishBattleStatistics from '../IceDuelFishBattleScreens/IceDuelFishBattleStatistics';
-import IceDuelFishBattleAbout from '../IceDuelFishBattleScreens/IceDuelFishBattleAbout';
+import IceDuelFishBattleGame from '../FishBattleScreens/IceDuelFishBattleGame';
+import IceDuelFishBattleHistory from '../FishBattleScreens/IceDuelFishBattleHistory';
+import IceDuelFishBattleStatistics from '../FishBattleScreens/IceDuelFishBattleStatistics';
+import IceDuelFishBattleAbout from '../FishBattleScreens/IceDuelFishBattleAbout';
 
 const Tab = createBottomTabNavigator();
 
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     justifyContent: 'center',
     position: 'absolute',
-    bottom: 51,
+    bottom: Platform.OS === 'ios' ? 61 : 75,
     paddingHorizontal: 14,
     borderTopColor: 'transparent',
     borderTopWidth: 1,

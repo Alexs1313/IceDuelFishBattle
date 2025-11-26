@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { fishBattleHistoryItems } from '../IceDuelFishBattleConsts/iceDuelFishBattleGameConsts';
+import { fishBattleHistoryItems } from '../FishBattleConsts/iceDuelFishBattleGameConsts';
 
 const IceDuelFishBattleResult = () => {
   const fishBattleNavigation = useNavigation();
@@ -176,7 +176,7 @@ const IceDuelFishBattleResult = () => {
             style={{ flex: 1 }}
           >
             <LinearGradient
-              colors={['#F1B013', '#E5D607', '#DC5B05']}
+              colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
               style={styles.fishBattleShareBtn}
             >
               <Text style={styles.fishBattleShareText}>Share</Text>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   fishBattleHeader: {
     width: '100%',
-    backgroundColor: '#FFFFFF4D',
+    backgroundColor: '#ffffff6f',
     borderRadius: 22,
     padding: 15,
     flexDirection: 'row',
@@ -217,13 +217,13 @@ const styles = StyleSheet.create({
   fishBattleResultNameTag: {
     borderRadius: 12,
     paddingVertical: 10,
-    paddingHorizontal: 40,
-    minWidth: 130,
+    paddingHorizontal: 20,
+    width: 160,
     alignItems: 'center',
     justifyContent: 'center',
   },
   fishBattleResultNameText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#000',
     fontFamily: 'Ubuntu-Medium',
   },

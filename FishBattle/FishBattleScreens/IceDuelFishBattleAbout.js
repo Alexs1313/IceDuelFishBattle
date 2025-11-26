@@ -1,6 +1,6 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import {
   View,
   Text,
@@ -76,7 +76,7 @@ track your stats to become a true ice battle champion.`,
 
         <TouchableOpacity onPress={fishBattleShareAbout} activeOpacity={0.7}>
           <LinearGradient
-            colors={['#F1B013', '#E5D607', '#DC5B05']}
+            colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
             style={fishBattleStyles.fishBattleShareBtn}
           >
             <Text style={fishBattleStyles.fishBattleShareText}>Share</Text>
@@ -97,7 +97,7 @@ const fishBattleStyles = StyleSheet.create({
   },
   fishBattleHeader: {
     width: '100%',
-    backgroundColor: '#FFFFFF4D',
+    backgroundColor: '#ffffff6f',
     borderRadius: 22,
     padding: 15,
     flexDirection: 'row',

@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import IceDuelFishBattleTab from './IceDuelFishBattleTab';
-import IceDuelFishBattleOnboard from '../IceDuelFishBattleScreens/IceDuelFishBattleOnboard';
-import IceDuelFishBattleGameplay from '../IceDuelFishBattleScreens/IceDuelFishBattleGameplay';
-import IceDuelFishBattleResult from '../IceDuelFishBattleScreens/IceDuelFishBattleResult';
+import IceDuelFishBattleOnboard from '../FishBattleScreens/IceDuelFishBattleOnboard';
+import IceDuelFishBattleGameplay from '../FishBattleScreens/IceDuelFishBattleGameplay';
+import IceDuelFishBattleResult from '../FishBattleScreens/IceDuelFishBattleResult';
 
 const Stack = createStackNavigator();
 

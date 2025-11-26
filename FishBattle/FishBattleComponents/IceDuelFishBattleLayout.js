@@ -5,6 +5,7 @@ const IceDuelFishBattleLayout = ({ children }) => {
     <ImageBackground
       source={require('../../assets/images/fishbattleback.png')}
       style={{ flex: 1 }}
+      blurRadius={2}
     >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import {
   View,
   Text,
@@ -152,7 +152,7 @@ const fishBattleStyles = StyleSheet.create({
     paddingBottom: 130,
   },
   fishBattleHeader: {
-    backgroundColor: '#FFFFFF4D',
+    backgroundColor: '#ffffff6f',
     borderRadius: 22,
     padding: 15,
     flexDirection: 'row',
@@ -170,6 +170,7 @@ const fishBattleStyles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
     fontFamily: 'Ubuntu-Medium',
+    textAlign: 'center',
   },
   fishBattleCardWrapper: {
     borderRadius: 14,
@@ -189,7 +190,7 @@ const fishBattleStyles = StyleSheet.create({
   fishBattleVsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 24,
+    gap: 14,
     marginBottom: 30,
     marginTop: 34,
     justifyContent: 'space-between',
@@ -197,15 +198,16 @@ const fishBattleStyles = StyleSheet.create({
   },
   fishBattleNameButton: {
     borderRadius: 10,
-    minWidth: 125,
-    height: 46,
+    width: '35%',
+    minHeight: 46,
+    padding: 6,
     borderWidth: 2,
     borderColor: '#F1B013',
     alignItems: 'center',
     justifyContent: 'center',
   },
   fishBattleNameText: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#fff',
     fontFamily: 'Ubuntu-Medium',
   },

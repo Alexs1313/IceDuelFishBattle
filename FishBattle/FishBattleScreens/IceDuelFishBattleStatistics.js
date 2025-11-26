@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import {
   View,
   Text,
@@ -32,10 +32,20 @@ const IceDuelFishBattleStatistics = () => {
     const fights = json ? JSON.parse(json) : [];
 
     const wins = {};
+    const players = new Set();
 
-    fights.forEach(f => {
-      if (f.winner !== 'Draw') {
-        wins[f.winner] = (wins[f.winner] || 0) + 1;
+    fights.forEach(fight => {
+      if (fight.player1) players.add(fight.player1);
+      if (fight.player2) players.add(fight.player2);
+    });
+
+    players.forEach(name => {
+      wins[name] = 0;
+    });
+
+    fights.forEach(fight => {
+      if (fight.winner && fight.winner !== 'Draw') {
+        wins[fight.winner] = (wins[fight.winner] || 0) + 1;
       }
     });
 
@@ -174,7 +184,7 @@ const IceDuelFishBattleStatistics = () => {
 
         <TouchableOpacity onPress={fishBattleOnShare} activeOpacity={0.7}>
           <LinearGradient
-            colors={['#F1B013', '#E5D607', '#DC5B05']}
+            colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
             style={fishBattleStyles.fishBattleShareBtn}
           >
             <Text style={fishBattleStyles.fishBattleShareBtnText}>Share</Text>
@@ -193,7 +203,7 @@ const fishBattleStyles = StyleSheet.create({
     paddingBottom: 130,
   },
   fishBattleHeader: {
-    backgroundColor: '#FFFFFF4D',
+    backgroundColor: '#ffffff6f',
     borderRadius: 22,
     padding: 15,
     flexDirection: 'row',
@@ -222,7 +232,7 @@ const fishBattleStyles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 42,
+    paddingHorizontal: 46,
   },
   fishBattleTh: {
     color: '#000',

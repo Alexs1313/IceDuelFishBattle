@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import LinearGradient from 'react-native-linear-gradient';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -146,7 +146,7 @@ const IceDuelFishBattleOnboard = () => {
           }
         >
           <LinearGradient
-            colors={['#F1B013', '#E5D607', '#DC5B05']}
+            colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
             style={styles.battleFishGradientButtonWrap}
           >
             <Text style={styles.battleFishGradientButtonText}>

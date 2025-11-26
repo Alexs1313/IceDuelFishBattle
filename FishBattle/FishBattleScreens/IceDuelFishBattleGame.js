@@ -1,4 +1,4 @@
-import IceDuelFishBattleLayout from '../IceDuelFishBattleComponents/IceDuelFishBattleLayout';
+import IceDuelFishBattleLayout from '../FishBattleComponents/IceDuelFishBattleLayout';
 import LinearGradient from 'react-native-linear-gradient';
 import { useState } from 'react';
 import {
@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import IceDuelFishBattleHeader from '../IceDuelFishBattleComponents/IceDuelFishBattleHeader';
+import IceDuelFishBattleHeader from '../FishBattleComponents/IceDuelFishBattleHeader';
 
 const { height } = Dimensions.get('window');
 
@@ -126,7 +126,7 @@ const IceDuelFishBattleGame = () => {
           onPress={() => startFishBattleGame()}
         >
           <LinearGradient
-            colors={['#F1B013', '#E5D607', '#DC5B05']}
+            colors={['#88c7f1ff', '#b1ddf9ff', '#1367b1ff']}
             style={styles.battleFishGradientButtonWrap}
           >
             <Text style={styles.battleFishGradientButtonText}>Start</Text>
@@ -214,23 +214,6 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   battleFishRowWrapper: { alignItems: 'center', flexDirection: 'row', gap: 30 },
-  battleFishHeader: {
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 20,
-    backgroundColor: '#FFFFFF4D',
-    borderRadius: 22,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 10,
-    padding: 15,
-  },
-  battleFishHeaderText: {
-    fontSize: 20,
-    fontFamily: 'Ubuntu-Medium',
-    color: '#fff',
-    width: '70%',
-  },
 });
 
 export default IceDuelFishBattleGame;

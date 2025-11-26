@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import IceDuelFishBattleStack from './IceDuelFishBattle/IceDuelFishBattleNavigation/IceDuelFishBattleStack';
-import IceDuelFishBattleLoader from './IceDuelFishBattle/IceDuelFishBattleComponents/IceDuelFishBattleLoader';
+import IceDuelFishBattleStack from './FishBattle/FishBattleNavigation/IceDuelFishBattleStack';
+import IceDuelFishBattleLoader from './FishBattle/FishBattleComponents/IceDuelFishBattleLoader';
 
 const App = () => {
   const [isVisibleLoader, setIsVisibleLoader] = useState(false);
@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsVisibleLoader(true);
-    }, 5000);
+    }, 6000);
   }, []);
 
   return (
